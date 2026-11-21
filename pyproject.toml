@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ci-packager"
+version = "1.0.0"
+description = "CI artifact packaging service with a first-valid-ZIP-wins retry race"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.165.0",
+    "uvicorn[standard]==0.54.0",
+    "python-multipart==0.0.34",
+]
+
+[tool.setuptools]
+packages = ["app"]

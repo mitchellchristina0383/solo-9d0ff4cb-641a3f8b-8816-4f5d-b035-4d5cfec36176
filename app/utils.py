@@ -1,0 +1,27 @@
+"""Small shared helpers."""
+
+from __future__ import annotations
+
+import hashlib
+from datetime import datetime, timezone
+from pathlib import Path
+
+
+def utcnow() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def iso(dt: datetime) -> str:
+    return dt.astimezone(timezone.utc).isoformat(timespec="microseconds")
+
+
+def parse_iso(raw: str) -> datetime:
+    return datetime.fromisoformat(raw)
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
